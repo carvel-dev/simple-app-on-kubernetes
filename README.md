@@ -109,9 +109,9 @@ There is currently no functionality in kbld to remove pushed images from registr
   - [`values.yml`](config-step-2-template/values.yml): defines two values used in `config.yml`
 - `config-step-3-build-local/`
   - [`config.yml`](config-step-3-build-local/build.yml): tells `kbld` about how to build container image from source (app.go + Dockerfile)
-  - [`config.yml`](config-step-3-build-local/config.yml): ~same as prev step~
-  - [`values.yml`](config-step-3-build-local/values.yml): ~same as prev step~
+  - [`config.yml`](config-step-3-build-local/config.yml): _same as prev step_
+  - [`values.yml`](config-step-3-build-local/values.yml): _same as prev step_
 - `config-step-4-build-and-push/`
   - [`config.yml`](config-step-4-build-and-push/build.yml): tells `kbld` about how to build container image and push to remote registry
-  - [`config.yml`](config-step-4-build-and-push/config.yml): ~same as prev step~
+  - [`config.yml`](config-step-4-build-and-push/config.yml): _same as prev step_
   - [`values.yml`](config-step-4-build-and-push/values.yml): defines shared configuration, including configuration for pushing container images
