@@ -1,14 +1,16 @@
-# k8s-simple-app
+# k8s-simple-app-example
 
-Simple Go application that shows how to use tools: [ytt](https://get-ytt.io), [kbld](https://get-kbld.io), [kapp](https://get-kapp.io) and [kwt](https://github.com/k14s/kapp) from k14s org.
+Example repo shows how to use tools from k14s org: [ytt](https://get-ytt.io), [kbld](https://get-kbld.io), [kapp](https://get-kapp.io) and [kwt](https://github.com/k14s/kapp) to work with a simple Go app on Kubernetes.
 
 ## Install k14s Tools
 
 Head over to [k14s.io](https://k14s.io/) for installation instructions.
 
-## Deploy
+## Deploying Application
 
-### Step 1
+Each top level step has an associated `config-step-*` directory. Refer to [Directory Layout](#directory-layout) for details about files.
+
+### Step 1: Deploying application
 
 Introduces [kapp](https://get-kapp.io) for deploying k8s resources.
 
@@ -18,13 +20,31 @@ kapp inspect -a simple-app --tree
 kapp logs -f -a simple-app
 ```
 
+### Step 1a: Viewing application
+
+Once deployed successfully, you can access frontend service at `127.0.0.1:8080` in your browser via `kubectl port-forward` command:
+
+```bash
+kubectl port-forward svc/simple-app 8080:80
+```
+
+You will have to restart port forward command after making any changes as pods are recreated. Alternatively consider using [k14s' kwt tool](https://github.com/k14s/kwt) which exposes cluser IP subnets and cluster DNS to your machine and does not require any restarts:
+
+```bash
+sudo -E kwt net start
+```
+
+and open [`http://simple-app.default.svc.cluster.local/`](http://simple-app.default.svc.cluster.local/).
+
+### Step 1b: Modifying application configuration
+
 Modify `metadata.name` for Deployment resource in `config-step-1-minimal/config.yml`, and run:
 
 ```bash
 kapp deploy -a simple-app -R -f config-step-1-minimal/ --diff-changes
 ```
 
-### Step 2
+### Step 2: Configuration templating
 
 Introduces [ytt](https://get-ytt.io) templating for more flexible configuration.
 
@@ -32,7 +52,15 @@ Introduces [ytt](https://get-ytt.io) templating for more flexible configuration.
 ytt template -R -f config-step-2-template/ | kapp deploy -a simple-app -f- --diff-changes -y
 ```
 
-### Step 3
+ytt provides a way to configure data values from command line as well:
+
+```bash
+ytt template -R -f config-step-2-template/ -v hello_msg=another-stranger | kapp deploy -a simple-app -f- --diff-changes -y
+```
+
+New message should be returned from the app in the browser.
+
+### Step 3: Building container images locally
 
 Introduces [kbld](https://get-kbld.io) functionality for building images from source code. This step requires Minikube. If Minikube is not available, skip to the next step.
 
@@ -41,7 +69,19 @@ eval $(minikube docker-env)
 ytt template -R -f config-step-3-build-local/ | kbld -f- | kapp deploy -a simple-app -f- --diff-changes -y
 ```
 
-### Step 4
+Note that rerunning above command again should be a noop, given that nothing has changed.
+
+### Step 3a: Modifying application source code
+
+Uncomment `fmt.Fprintf(w, "<p>local change</p>")` line in `app.go`, and re-run above command:
+
+```bash
+ytt template -R -f config-step-3-build-local/ | kbld -f- | kapp deploy -a simple-app -f- --diff-changes -y
+```
+
+Observe that new container was built, and deployed. This change should be returned from the app in the browser.
+
+### Step 4: Building and pushing container images to registry
 
 Introduces [kbld](https://get-kbld.io) functionality to push to remote registries. This step can works against Minikube or remote cluster.
 
@@ -49,6 +89,14 @@ Introduces [kbld](https://get-kbld.io) functionality to push to remote registrie
 docker login -u dkalinin -p ...
 ytt template -R -f config-step-4-build-and-push/ -v push_images=true -v push_images_repo=docker.io/dkalinin/k8s-simple-app | kbld -f- | kapp deploy -a simple-app -f- --diff-changes -y
 ```
+
+### Step 5: Clean up cluster resources
+
+```bash
+kapp delete -a simple-app
+```
+
+There is currently no functionality in kbld to remove pushed images from registry.
 
 ## Directory Layout
 
