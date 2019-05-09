@@ -2,5 +2,5 @@
 apiVersion: kbld.k14s.io/v1alpha1
 kind: Sources
 sources:
-- image: docker.io/dkalinin/k14s-simple-app
+- image: docker.io/dkalinin/k8s-simple-app
   path: .
