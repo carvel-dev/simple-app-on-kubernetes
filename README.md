@@ -115,6 +115,8 @@ There is currently no functionality in kbld to remove pushed images from registr
 - `config-step-2-template/`
   - [`config.yml`](config-step-2-template/config.yml): slightly modified configuration to use `ytt` features, such as data module and functions
   - [`values.yml`](config-step-2-template/values.yml): defines extracted data values used in `config.yml`
+- `config-step-2a-overlays/`
+  - [`custom-scale.yml`](config-step-2a-overlays/custom-scale.yml): ytt overlay to set number of deployment replicas to 3
 - `config-step-3-build-local/`
   - [`build.yml`](config-step-3-build-local/build.yml): tells `kbld` about how to build container image from source (app.go + Dockerfile)
   - [`config.yml`](config-step-3-build-local/config.yml): _same as prev step_
