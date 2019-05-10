@@ -60,6 +60,14 @@ ytt template -R -f config-step-2-template/ -v hello_msg=another-stranger | kapp 
 
 New message should be returned from the app in the browser.
 
+### Step 2a: Configuration customization
+
+Introduces [ytt overlays](https://github.com/k14s/ytt/blob/master/docs/lang-ref-ytt-overlay.md) to add customizations without modifying original `config.yml`.
+
+```bash
+ytt template -R -f config-step-2-template/ -f config-step-2a-overlays/custom-scale.yml | kapp deploy -a simple-app -f- --diff-changes -y
+```
+
 ### Step 3: Building container images locally
 
 Introduces [kbld](https://get-kbld.io) functionality for building images from source code. This step requires Minikube. If Minikube is not available, skip to the next step.
