@@ -38,7 +38,7 @@ and open [`http://simple-app.default.svc.cluster.local/`](http://simple-app.defa
 
 ### Step 1b: Modifying application configuration
 
-Modify `metadata.name` for Deployment resource in `config-step-1-minimal/config.yml`, and run:
+Modify `HELLO_MSG` environment value from `stranger` to something else in `config-step-1-minimal/config.yml`, and run:
 
 ```bash
 kapp deploy -a simple-app -R -f config-step-1-minimal/ --diff-changes
