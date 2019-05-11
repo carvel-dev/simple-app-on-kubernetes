@@ -122,6 +122,7 @@ There is currently no functionality in kbld to remove pushed images from registr
   - [`config.yml`](config-step-3-build-local/config.yml): _same as prev step_
   - [`values.yml`](config-step-3-build-local/values.yml): _same as prev step_
 - `config-step-4-build-and-push/`
-  - [`build.yml`](config-step-4-build-and-push/build.yml): tells `kbld` about how to build container image and push to remote registry
+  - [`build.yml`](config-step-4-build-and-push/build.yml): _same as prev step_
+  - [`push.yml`](config-step-4-build-and-push/push.yml): tells `kbld` about how to push container image to remote registry
   - [`config.yml`](config-step-4-build-and-push/config.yml): _same as prev step_
   - [`values.yml`](config-step-4-build-and-push/values.yml): defines shared configuration, including configuration for pushing container images
