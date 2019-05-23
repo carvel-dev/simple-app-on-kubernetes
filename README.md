@@ -49,13 +49,13 @@ kapp deploy -a simple-app -f config-step-1-minimal/ --diff-changes
 Introduces [ytt](https://get-ytt.io) templating for more flexible configuration.
 
 ```bash
-ytt template -f config-step-2-template/ | kapp deploy -a simple-app -f- --diff-changes -y
+ytt -f config-step-2-template/ | kapp deploy -a simple-app -f- --diff-changes -y
 ```
 
 ytt provides a way to configure data values from command line as well:
 
 ```bash
-ytt template -f config-step-2-template/ -v hello_msg=another-stranger | kapp deploy -a simple-app -f- --diff-changes -y
+ytt -f config-step-2-template/ -v hello_msg=another-stranger | kapp deploy -a simple-app -f- --diff-changes -y
 ```
 
 New message should be returned from the app in the browser.
@@ -65,7 +65,7 @@ New message should be returned from the app in the browser.
 Introduces [ytt overlays](https://github.com/k14s/ytt/blob/master/docs/lang-ref-ytt-overlay.md) to add customizations without modifying original `config.yml`.
 
 ```bash
-ytt template -f config-step-2-template/ -f config-step-2a-overlays/custom-scale.yml | kapp deploy -a simple-app -f- --diff-changes -y
+ytt -f config-step-2-template/ -f config-step-2a-overlays/custom-scale.yml | kapp deploy -a simple-app -f- --diff-changes -y
 ```
 
 ### Step 3: Building container images locally
@@ -74,7 +74,7 @@ Introduces [kbld](https://get-kbld.io) functionality for building images from so
 
 ```bash
 eval $(minikube docker-env)
-ytt template -f config-step-3-build-local/ | kbld -f- | kapp deploy -a simple-app -f- --diff-changes -y
+ytt -f config-step-3-build-local/ | kbld -f- | kapp deploy -a simple-app -f- --diff-changes -y
 ```
 
 Note that rerunning above command again should be a noop, given that nothing has changed.
@@ -84,7 +84,7 @@ Note that rerunning above command again should be a noop, given that nothing has
 Uncomment `fmt.Fprintf(w, "<p>local change</p>")` line in `app.go`, and re-run above command:
 
 ```bash
-ytt template -f config-step-3-build-local/ | kbld -f- | kapp deploy -a simple-app -f- --diff-changes -y
+ytt -f config-step-3-build-local/ | kbld -f- | kapp deploy -a simple-app -f- --diff-changes -y
 ```
 
 Observe that new container was built, and deployed. This change should be returned from the app in the browser.
@@ -95,7 +95,7 @@ Introduces [kbld](https://get-kbld.io) functionality to push to remote registrie
 
 ```bash
 docker login -u dkalinin -p ...
-ytt template -f config-step-4-build-and-push/ -v push_images=true -v push_images_repo=docker.io/dkalinin/k8s-simple-app | kbld -f- | kapp deploy -a simple-app -f- --diff-changes -y
+ytt -f config-step-4-build-and-push/ -v push_images=true -v push_images_repo=docker.io/dkalinin/k8s-simple-app | kbld -f- | kapp deploy -a simple-app -f- --diff-changes -y
 ```
 
 ### Step 5: Clean up cluster resources
