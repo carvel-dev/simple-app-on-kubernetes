@@ -2,6 +2,8 @@
 
 Example repo shows how to use tools from k14s org: [ytt](https://get-ytt.io), [kbld](https://get-kbld.io), [kapp](https://get-kapp.io) and [kwt](https://github.com/k14s/kapp) to work with a simple Go app on Kubernetes.
 
+Associated blog post: [Introducing k14s (Kubernetes Tools): Simple and Composable Tools for Application Deployment](https://content.pivotal.io/blog/introducing-k14s-kubernetes-tools-simple-and-composable-tools-for-application-deployment).
+
 ## Install k14s Tools
 
 Head over to [k14s.io](https://k14s.io/) for installation instructions.
@@ -60,12 +62,22 @@ ytt -f config-step-2-template/ -v hello_msg=another-stranger | kapp deploy -a si
 
 New message should be returned from the app in the browser.
 
-### Step 2a: Configuration customization
+### Step 2a: Configuration patching
 
-Introduces [ytt overlays](https://github.com/k14s/ytt/blob/master/docs/lang-ref-ytt-overlay.md) to add customizations without modifying original `config.yml`.
+Introduces [ytt overlays](https://github.com/k14s/ytt/blob/master/docs/lang-ref-ytt-overlay.md) to patch configuration without modifying original `config.yml`.
 
 ```bash
 ytt -f config-step-2-template/ -f config-step-2a-overlays/custom-scale.yml | kapp deploy -a simple-app -f- --diff-changes -y
+```
+
+### Step 2b: Customizing configuration data values per environment
+
+Requires ytt v0.13.0+.
+
+Introduces [use of multiple data values](https://github.com/k14s/ytt/blob/master/docs/ytt-data-values.md) to show layering of configuration for different environment without modifying default `values.yml`.
+
+```bash
+ytt -f config-step-2-template/ -f config-step-2b-multiple-data-values/ | kapp deploy -a simple-app -f- --diff-changes -y
 ```
 
 ### Step 3: Building container images locally
