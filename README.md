@@ -46,18 +46,20 @@ Modify `HELLO_MSG` environment value from `stranger` to something else in `confi
 kapp deploy -a simple-app -f config-step-1-minimal/ --diff-changes
 ```
 
+In following steps we'll use `-c` shorthand for `--diff-changes`.
+
 ### Step 2: Configuration templating
 
 Introduces [ytt](https://get-ytt.io) templating for more flexible configuration.
 
 ```bash
-ytt -f config-step-2-template/ | kapp deploy -a simple-app -f- --diff-changes -y
+kapp deploy -a simple-app -c -f <(ytt -f config-step-2-template/)
 ```
 
 ytt provides a way to configure data values from command line as well:
 
 ```bash
-ytt -f config-step-2-template/ -v hello_msg=another-stranger | kapp deploy -a simple-app -f- --diff-changes -y
+kapp deploy -a simple-app -c -f <(ytt -f config-step-2-template/ -v hello_msg=another-stranger)
 ```
 
 New message should be returned from the app in the browser.
@@ -67,7 +69,7 @@ New message should be returned from the app in the browser.
 Introduces [ytt overlays](https://github.com/k14s/ytt/blob/master/docs/lang-ref-ytt-overlay.md) to patch configuration without modifying original `config.yml`.
 
 ```bash
-ytt -f config-step-2-template/ -f config-step-2a-overlays/custom-scale.yml | kapp deploy -a simple-app -f- --diff-changes -y
+kapp deploy -a simple-app -c -f <(ytt -f config-step-2-template/ -f config-step-2a-overlays/custom-scale.yml)
 ```
 
 ### Step 2b: Customizing configuration data values per environment
@@ -77,7 +79,7 @@ Requires ytt v0.13.0+.
 Introduces [use of multiple data values](https://github.com/k14s/ytt/blob/master/docs/ytt-data-values.md) to show layering of configuration for different environment without modifying default `values.yml`.
 
 ```bash
-ytt -f config-step-2-template/ -f config-step-2b-multiple-data-values/ | kapp deploy -a simple-app -f- --diff-changes -y
+kapp deploy -a simple-app -c -f <(ytt -f config-step-2-template/ -f config-step-2b-multiple-data-values/)
 ```
 
 ### Step 3: Building container images locally
@@ -86,7 +88,7 @@ Introduces [kbld](https://get-kbld.io) functionality for building images from so
 
 ```bash
 eval $(minikube docker-env)
-ytt -f config-step-3-build-local/ | kbld -f- | kapp deploy -a simple-app -f- --diff-changes -y
+kapp deploy -a simple-app -c -f <(ytt -f config-step-3-build-local/ | kbld -f-)
 ```
 
 Note that rerunning above command again should be a noop, given that nothing has changed.
@@ -96,7 +98,7 @@ Note that rerunning above command again should be a noop, given that nothing has
 Uncomment `fmt.Fprintf(w, "<p>local change</p>")` line in `app.go`, and re-run above command:
 
 ```bash
-ytt -f config-step-3-build-local/ | kbld -f- | kapp deploy -a simple-app -f- --diff-changes -y
+kapp deploy -a simple-app -c -f <(ytt -f config-step-3-build-local/ | kbld -f-)
 ```
 
 Observe that new container was built, and deployed. This change should be returned from the app in the browser.
@@ -107,7 +109,7 @@ Introduces [kbld](https://get-kbld.io) functionality to push to remote registrie
 
 ```bash
 docker login -u dkalinin -p ...
-ytt -f config-step-4-build-and-push/ -v push_images=true -v push_images_repo=docker.io/dkalinin/k8s-simple-app | kbld -f- | kapp deploy -a simple-app -f- --diff-changes -y
+kapp deploy -a simple-app -c -f <(ytt -f config-step-4-build-and-push/ -v push_images=true -v push_images_repo=docker.io/dkalinin/k8s-simple-app | kbld -f-)
 ```
 
 ### Step 5: Clean up cluster resources
