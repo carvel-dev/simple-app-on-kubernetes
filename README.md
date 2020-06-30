@@ -66,7 +66,7 @@ New message should be returned from the app in the browser.
 
 ### Step 2a: Configuration patching
 
-Introduces [ytt overlays](https://github.com/k14s/ytt/blob/master/docs/lang-ref-ytt-overlay.md) to patch configuration without modifying original `config.yml`.
+Introduces [ytt overlays](https://github.com/k14s/ytt/blob/develop/docs/lang-ref-ytt-overlay.md) to patch configuration without modifying original `config.yml`.
 
 ```bash
 kapp deploy -a simple-app -c -f <(ytt -f config-step-2-template/ -f config-step-2a-overlays/custom-scale.yml)
@@ -76,7 +76,7 @@ kapp deploy -a simple-app -c -f <(ytt -f config-step-2-template/ -f config-step-
 
 Requires ytt v0.13.0+.
 
-Introduces [use of multiple data values](https://github.com/k14s/ytt/blob/master/docs/ytt-data-values.md) to show layering of configuration for different environment without modifying default `values.yml`.
+Introduces [use of multiple data values](https://github.com/k14s/ytt/blob/develop/docs/ytt-data-values.md) to show layering of configuration for different environment without modifying default `values.yml`.
 
 ```bash
 kapp deploy -a simple-app -c -f <(ytt -f config-step-2-template/ -f config-step-2b-multiple-data-values/)
