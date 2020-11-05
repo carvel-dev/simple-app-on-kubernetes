@@ -43,7 +43,13 @@ and open [`http://simple-app.default.svc.cluster.local/`](http://simple-app.defa
 Modify `HELLO_MSG` environment value from `stranger` to something else in `config-step-1-minimal/config.yml`, and run:
 
 ```bash
-kapp deploy -a simple-app -f config-step-1-minimal/ --diff-changes
+kapp deploy -a simple-app -f config-step-1-minimal/config2.yml
+```
+
+If you didn't copy the file, but simply edited it, then you need to run a different command to see the differences.
+
+```bash
+kapp deploy -a simple-app -f config-step-1-minimal/config.yml --diff-changes
 ```
 
 In following steps we'll use `-c` shorthand for `--diff-changes`.
