@@ -17,7 +17,7 @@ Each top level step has an associated `config-step-*` directory. Refer to [Direc
 Introduces [kapp](https://get-kapp.io) for deploying k8s resources.
 
 ```bash
-kapp deploy -a simple-app -f config-step-1-minimal/
+kapp deploy -a simple-app -f config-step-1-minimal/config.yml
 kapp inspect -a simple-app --tree
 kapp logs -f -a simple-app
 ```
