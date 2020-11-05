@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: simple-app
-        image: docker.io/dkalinin/k8s-simple-app@sha256:4c8b96d4fffdfae29258d94a22ae4ad1fe36139d47288b8960d9958d1e63a9d0
+        image: harbor.dev.livefire.lab/library/tbs/tiny@sha256:6de8182fb9ba01d15b067d6a50a25f00fa9e8e6059daf881a5df9ad673b46910
         env:
         - name: HELLO_MSG
           value: stranger
