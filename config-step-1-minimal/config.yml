@@ -17,7 +17,7 @@ metadata:
 #  namespace: default
   name: simple-app
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       simple-app: ""
