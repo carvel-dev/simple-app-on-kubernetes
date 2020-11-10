@@ -1,12 +1,12 @@
 # k8s-simple-app-example
 
-Example repo shows how to use tools from k14s org: [ytt](https://get-ytt.io), [kbld](https://get-kbld.io), [kapp](https://get-kapp.io) and [kwt](https://github.com/k14s/kapp) to work with a simple Go app on Kubernetes.
+Example repo shows how to use tools from carvel dev: [ytt](https://get-ytt.io), [kbld](https://get-kbld.io), [kapp](https://get-kapp.io) and [kwt](https://github.com/k14s/kwt) to work with a simple Go app on Kubernetes.
 
-Associated blog post: [Introducing k14s (Kubernetes Tools): Simple and Composable Tools for Application Deployment](https://content.pivotal.io/blog/introducing-k14s-kubernetes-tools-simple-and-composable-tools-for-application-deployment).
+Associated blog post: [Introducing k14s (Kubernetes Tools): Simple and Composable Tools for Application Deployment](https://tanzu.vmware.com/content/blog/introducing-k14s-kubernetes-tools-simple-and-composable-tools-for-application-deployment).
 
-## Install k14s Tools
+## Install Carvel Tools
 
-Head over to [k14s.io](https://k14s.io/) for installation instructions.
+Head over to [carvel.dev](https://carvel.dev/) for installation instructions.
 
 ## Deploying Application
 
