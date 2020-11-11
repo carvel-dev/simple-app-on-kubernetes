@@ -31,4 +31,4 @@ spec:
         image: harbor.dev.livefire.lab/library/k8s:k8s-sample
         env:
         - name: HELLO_MSG
-          value: Kevin! You're a genius!
+          value: another stranger
