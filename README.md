@@ -105,7 +105,7 @@ Observe that new container was built, and deployed. This change should be return
 
 ### Step 4: Building and pushing container images to registry
 
-Introduces [kbld](https://get-kbld.io) functionality to push to remote registries. This step can works against Minikube or remote cluster.
+Introduces [kbld](https://get-kbld.io) functionality to push to remote registries. This step can work with Minikube or any remote cluster.
 
 ```bash
 docker login -u dkalinin -p ...
