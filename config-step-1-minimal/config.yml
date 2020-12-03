@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: simple-app
-        image: harbor.dev.livefire.lab/library/k8s:k8s-sample
+        image: harbor.dev.livefire.lab/<project_name>/k8s:k8s-sample
         env:
         - name: HELLO_MSG
           value: stranger
