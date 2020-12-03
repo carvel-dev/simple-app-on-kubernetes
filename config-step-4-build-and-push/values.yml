@@ -4,4 +4,4 @@ svc_port: 80
 app_port: 80
 hello_msg: stranger
 push_images: true
-push_images_repo: "" #! e.g. "docker.io/dkalinin/k8s-simple-app"
+push_images_repo: "" #! e.g. "harbor.dev.livefire.lab/<project_name>/k8s:k8s-simple"

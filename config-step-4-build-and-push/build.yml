@@ -2,5 +2,5 @@
 apiVersion: kbld.k14s.io/v1alpha1
 kind: Sources
 sources:
-- image: docker.io/dkalinin/k8s-simple-app
+- image: harbor.dev.livefire.lab/<project_name>/k8s:k8s-simple
   path: .
