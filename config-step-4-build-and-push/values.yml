@@ -3,5 +3,8 @@
 svc_port: 80
 app_port: 80
 hello_msg: stranger
-push_images: true
-push_images_repo: "" #! e.g. "docker.io/dkalinin/k8s-simple-app"
+
+#! Optionally specify image repo to push image to.
+#! If not specified, image will not be pushed to a registry
+#! (e.g. "docker.io/dkalinin/k8s-simple-app")
+push_images_repo: ""

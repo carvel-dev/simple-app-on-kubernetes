@@ -109,7 +109,7 @@ Introduces [kbld](https://get-kbld.io) functionality to push to remote registrie
 
 ```bash
 docker login -u dkalinin -p ...
-kapp deploy -a simple-app -c -f <(ytt -f config-step-4-build-and-push/ -v push_images=true -v push_images_repo=docker.io/dkalinin/k8s-simple-app | kbld -f-)
+kapp deploy -a simple-app -c -f <(ytt -f config-step-4-build-and-push/ -v push_images_repo=gcr.io/projectX/k8s-simple-app | kbld -f-)
 ```
 
 ### Step 5: Clean up cluster resources
