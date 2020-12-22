@@ -1,4 +1,4 @@
-# k8s-simple-app-example
+# k8s-simple-app
 
 Example repo shows how to use tools from k14s org: [ytt](https://get-ytt.io), [kbld](https://get-kbld.io), [kapp](https://get-kapp.io) and [kwt](https://github.com/k14s/kapp) to work with a simple Go app on Kubernetes.
 
