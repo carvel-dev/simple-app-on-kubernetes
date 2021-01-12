@@ -1,3 +1,5 @@
+![logo](logos/CarvelLogo.png)
+
 # k8s-simple-app-example
 
 Example repo shows how to use tools from carvel dev: [ytt](https://get-ytt.io), [kbld](https://get-kbld.io), [kapp](https://get-kapp.io) and [kwt](https://github.com/k14s/kwt) to work with a simple Go app on Kubernetes.
@@ -140,3 +142,11 @@ There is currently no functionality in kbld to remove pushed images from registr
   - [`push.yml`](config-step-4-build-and-push/push.yml): tells `kbld` about how to push container image to remote registry
   - [`config.yml`](config-step-4-build-and-push/config.yml): _same as prev step_
   - [`values.yml`](config-step-4-build-and-push/values.yml): defines shared configuration, including configuration for pushing container images
+
+### Join the Community and Make Carvel Better
+Carvel is better because of our contributors and maintainers. It is because of you that we can bring great software to the community.
+Please join us during our online community meetings ([Zoom link](http://community.klt.rip/)) every other Wednesday at 12PM ET / 9AM PT and catch up with past meetings on the [VMware YouTube Channel](https://www.youtube.com/playlist?list=PL7bmigfV0EqQ_cDNKVTIcZt-dAM-hpClS).
+Join [Google Group](https://groups.google.com/g/carvel-dev) to get updates on the project and invites to community meetings.
+You can chat with us on Kubernetes Slack in the #carvel channel and follow us on Twitter at @carvel_dev.
+
+Check out which organizations are using and contributing to Carvel: [Adopter's list](https://github.com/vmware-tanzu/carvel/ADOPTERS.md)
