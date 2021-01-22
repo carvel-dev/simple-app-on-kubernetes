@@ -2,9 +2,9 @@
 
 # k8s-simple-app-example
 
-Example repo shows how to use tools from carvel dev: [ytt](https://get-ytt.io), [kbld](https://get-kbld.io), [kapp](https://get-kapp.io) and [kwt](https://github.com/k14s/kwt) to work with a simple Go app on Kubernetes.
+Example repo shows how to use tools from carvel dev: [ytt](https://carvel.dev/ytt), [kbld](https://carvel.dev/kbld), [kapp](https://carvel.dev/kapp) and [kwt](https://github.com/vmware-tanzu/carvel-kwt) to work with a simple Go app on Kubernetes.
 
-Associated blog post: [Introducing k14s (Kubernetes Tools): Simple and Composable Tools for Application Deployment](https://tanzu.vmware.com/content/blog/introducing-k14s-kubernetes-tools-simple-and-composable-tools-for-application-deployment).
+Associated blog post: [Deploying Kubernetes Applications with ytt, kbld, and kapp](https://carvel.dev/blog/deploying-apps-with-ytt-kbld-kapp/).
 
 ## Install Carvel Tools
 
@@ -16,7 +16,7 @@ Each top level step has an associated `config-step-*` directory. Refer to [Direc
 
 ### Step 1: Deploying application
 
-Introduces [kapp](https://get-kapp.io) for deploying k8s resources.
+Introduces [kapp](https://carvel.dev/kapp) for deploying k8s resources.
 
 ```bash
 kapp deploy -a simple-app -f config-step-1-minimal/
@@ -32,7 +32,7 @@ Once deployed successfully, you can access frontend service at `127.0.0.1:8080` 
 kubectl port-forward svc/simple-app 8080:80
 ```
 
-You will have to restart port forward command after making any changes as pods are recreated. Alternatively consider using [k14s' kwt tool](https://github.com/k14s/kwt) which exposes cluser IP subnets and cluster DNS to your machine and does not require any restarts:
+You will have to restart port forward command after making any changes as pods are recreated. Alternatively consider using [kwt](https://github.com/vmware-tanzu/carvel-kwt) which exposes cluser IP subnets and cluster DNS to your machine and does not require any restarts:
 
 ```bash
 sudo -E kwt net start
@@ -52,7 +52,7 @@ In following steps we'll use `-c` shorthand for `--diff-changes`.
 
 ### Step 2: Configuration templating
 
-Introduces [ytt](https://get-ytt.io) templating for more flexible configuration.
+Introduces [ytt](https://carvel.dev/ytt) templating for more flexible configuration.
 
 ```bash
 kapp deploy -a simple-app -c -f <(ytt -f config-step-2-template/)
@@ -68,7 +68,7 @@ New message should be returned from the app in the browser.
 
 ### Step 2a: Configuration patching
 
-Introduces [ytt overlays](https://github.com/k14s/ytt/blob/develop/docs/lang-ref-ytt-overlay.md) to patch configuration without modifying original `config.yml`.
+Introduces [ytt overlays](https://carvel.dev/ytt/docs/latest/lang-ref-ytt-overlay/) to patch configuration without modifying original `config.yml`.
 
 ```bash
 kapp deploy -a simple-app -c -f <(ytt -f config-step-2-template/ -f config-step-2a-overlays/custom-scale.yml)
@@ -78,7 +78,7 @@ kapp deploy -a simple-app -c -f <(ytt -f config-step-2-template/ -f config-step-
 
 Requires ytt v0.13.0+.
 
-Introduces [use of multiple data values](https://github.com/k14s/ytt/blob/develop/docs/ytt-data-values.md) to show layering of configuration for different environment without modifying default `values.yml`.
+Introduces [use of multiple data values](https://carvel.dev/ytt/docs/latest/ytt-data-values/) to show layering of configuration for different environment without modifying default `values.yml`.
 
 ```bash
 kapp deploy -a simple-app -c -f <(ytt -f config-step-2-template/ -f config-step-2b-multiple-data-values/)
@@ -86,7 +86,7 @@ kapp deploy -a simple-app -c -f <(ytt -f config-step-2-template/ -f config-step-
 
 ### Step 3: Building container images locally
 
-Introduces [kbld](https://get-kbld.io) functionality for building images from source code. This step requires Minikube. If Minikube is not available, skip to the next step.
+Introduces [kbld](https://carvel.dev/kbld) functionality for building images from source code. This step requires Minikube. If Minikube is not available, skip to the next step.
 
 ```bash
 eval $(minikube docker-env)
@@ -107,7 +107,7 @@ Observe that new container was built, and deployed. This change should be return
 
 ### Step 4: Building and pushing container images to registry
 
-Introduces [kbld](https://get-kbld.io) functionality to push to remote registries. This step can work with Minikube or any remote cluster.
+Introduces [kbld](https://carvel.dev/kbld) functionality to push to remote registries. This step can work with Minikube or any remote cluster.
 
 ```bash
 docker login -u dkalinin -p ...
